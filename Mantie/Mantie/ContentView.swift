@@ -10,13 +10,25 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            Image("web")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-                //.resizable()
-            Text("Hey Mentiè")
-        }
-        .padding()
+            TabView {
+                        HomeView()
+                            .tabItem {
+                                Label("Home", systemImage: "house")
+                            }
+
+                        ReservationView()
+                            .tabItem {
+                                Label("Reservations", systemImage: "calendar")
+                            }
+
+                        MenuView()
+                            .tabItem {
+                                Label("Menu", systemImage: "list.dash")
+                            }
+                    }
+                    .accentColor(.pink) 
+                }
+            
     }
 }
 
