@@ -20,6 +20,7 @@
 		39232B172B21EAF500F91174 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39232B162B21EAF500F91174 /* OnBoardingView.swift */; };
 		39232B1A2B26413100F91174 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 39232B192B26413100F91174 /* Lottie */; };
 		39232B1C2B2641C500F91174 /* LotteAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39232B1B2B2641C500F91174 /* LotteAnimationView.swift */; };
+		39232B1E2B271A1800F91174 /* CircleGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39232B1D2B271A1800F91174 /* CircleGroupView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		39232B142B21BB4500F91174 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		39232B162B21EAF500F91174 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 		39232B1B2B2641C500F91174 /* LotteAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteAnimationView.swift; sourceTree = "<group>"; };
+		39232B1D2B271A1800F91174 /* CircleGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleGroupView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 				39232AE72B207C1800F91174 /* ContentView.swift */,
 				39232AE92B207C1900F91174 /* Assets.xcassets */,
 				39232AEB2B207C1900F91174 /* Preview Content */,
+				39232B1D2B271A1800F91174 /* CircleGroupView.swift */,
 			);
 			path = Mantie;
 			sourceTree = "<group>";
@@ -290,6 +293,7 @@
 			files = (
 				39232B152B21BB4500F91174 /* MenuView.swift in Sources */,
 				39232B102B21BAD500F91174 /* HomeView.swift in Sources */,
+				39232B1E2B271A1800F91174 /* CircleGroupView.swift in Sources */,
 				39232B1C2B2641C500F91174 /* LotteAnimationView.swift in Sources */,
 				39232B132B21BB3300F91174 /* ReservationView.swift in Sources */,
 				39232AE82B207C1800F91174 /* ContentView.swift in Sources */,
