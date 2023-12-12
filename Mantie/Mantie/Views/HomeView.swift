@@ -13,29 +13,29 @@ import MapKit
 
 
 // CLASS FOR LOCATION SEARCH DROPDOWN
-class LocationSearchCompleter: NSObject, ObservableObject, MKLocalSearchCompleterDelegate {
-    @Published var suggestions: [MKLocalSearchCompletion] = []
-    var completer: MKLocalSearchCompleter
-
-    override init() {
-        completer = MKLocalSearchCompleter()
-        super.init()
-        completer.delegate = self
-    }
-
-    func search(query: String) {
-        completer.queryFragment = query
-    }
-
-    func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
-        suggestions = completer.results
-    }
-
-    func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
-        // Handle error
-        print("Completer failed with error: \(error.localizedDescription)")
-    }
-}
+//class LocationSearchCompleter: NSObject, ObservableObject, MKLocalSearchCompleterDelegate {
+//    @Published var suggestions: [MKLocalSearchCompletion] = []
+//    var completer: MKLocalSearchCompleter
+//
+//    override init() {
+//        completer = MKLocalSearchCompleter()
+//        super.init()
+//        completer.delegate = self
+//    }
+//
+//    func search(query: String) {
+//        completer.queryFragment = query
+//    }
+//
+//    func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
+//        suggestions = completer.results
+//    }
+//
+//    func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
+//        // Handle error
+//        print("Completer failed with error: \(error.localizedDescription)")
+//    }
+//}
 
 struct HomeView: View {
     @State private var searchText = ""
@@ -60,16 +60,16 @@ struct SearchBar: View {
     @Binding var region: MKCoordinateRegion
 
     var body: some View {
-        TextField("        Search for places", text: $searchText, onCommit: {
+        TextField("          Search for places", text: $searchText, onCommit: {
             performSearch()
         })
-        .textFieldStyle(RoundedBorderTextFieldStyle())
+        //.textFieldStyle(RoundedBorderTextFieldStyle())
         .padding()
         .background(Color.white)
         .cornerRadius(10)
         .shadow(radius: 4)
         .overlay(
-            HStack {
+            ZStack {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(.gray)
                     .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)

@@ -15,13 +15,18 @@ struct OnboardingView: View {
     @State private var isAnimating: Bool = false
     @State private var imageOffset: CGSize = .zero
     @State private var indicatorOpacity: Double = 1
-    @State private var titleText: String = "Share."
+    @State private var titleText: String = "MANTIÉ"
+    @State private var currentImageName: String = "guy"
+    @State private var isNavigating = false
+    @State private var searchText = ""
     
-    @AppStorage("onboarding") var isOnboardingViewActive: Bool = true //This true value will only be added to the var if the app doesn't finds the "onboarding" key in the local storage. We have already defined it in the content view which means the value of this key from content view will be taken...
+    @AppStorage("onboarding") var isOnboardingViewActive: Bool = true
     
     var body: some View {
+        
+        
         ZStack {
-            Color("ColorBlue")
+            Color(.orangeM)
                 .ignoresSafeArea(.all, edges: .all)
             
             VStack(spacing: 20) {
@@ -33,12 +38,14 @@ struct OnboardingView: View {
                         .font(.system(size: 60))
                         .fontWeight(.heavy)
                         .foregroundColor(.white)
+                        .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
                         .transition(.opacity)
                         .id(titleText)
                     
                     Text("""
-                            It's not how much we give but,
-                            how much love we put into giving.
+                            Trust your luggage with Mantié
+                            We help you to travel light!
+                            
                             """)
                         .font(.title3)
                         .fontWeight(.light)
@@ -52,12 +59,12 @@ struct OnboardingView: View {
                 
                 // MARK: - Center
                 ZStack{
-                    CircleGroupView(ShapeColor: .white,ShapeOpacity: 0.2)
+                    CircleGroupView(ShapeColor: Color(.white),ShapeOpacity: 0.4)
                         .offset(x: imageOffset.width * -1) // To make the circle go in the opposite direction as of Image.
                         .blur(radius: abs(imageOffset.width / 7))
                         .animation(.easeOut(duration: 1), value: imageOffset)
                     
-                    Image("character-1")
+                    Image(currentImageName)
                         .resizable()
                         .scaledToFit()
                         .opacity(isAnimating ? 1 : 0)
@@ -72,7 +79,8 @@ struct OnboardingView: View {
                                         
                                         withAnimation(.linear(duration: 0.25)){
                                             indicatorOpacity = 0
-                                            titleText = "Give."
+                                            titleText = "Travel"
+                                            currentImageName = "guy"
                                         }
                                         
                                     }
@@ -83,7 +91,8 @@ struct OnboardingView: View {
                                     
                                     withAnimation(.linear(duration: 0.25)){
                                         indicatorOpacity = 1
-                                        titleText = "Share."
+                                        titleText = "Light."
+                                        currentImageName = "guy2"
                                     }
                                     //}
                                     
@@ -93,6 +102,7 @@ struct OnboardingView: View {
                         .animation(.easeOut(duration: 1), value: imageOffset)
                         
                 }
+                Spacer()
                 .overlay(
                     Image(systemName: "arrow.left.and.right.circle")
                         .font(.system(size: 44, weight: .ultraLight))
@@ -108,74 +118,66 @@ struct OnboardingView: View {
                 
                 //MARK: - Footer
                 ZStack{
-                    Capsule()
-                        .fill(Color.white.opacity(0.2))
-                    Capsule()
-                        .fill(Color.white.opacity(0.2))
-                        .padding(8)
-                    
-                    Text("Get Started")
-                        .font(.system(.title3, design: .rounded))
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                        .offset(x: 20)
-                    
-                    HStack {
-                        Capsule()
-                            .fill(Color("ColorRed").opacity(0.8))
-                            .frame(width: buttonOffset + 80)
+                    NavigationLink(destination: HomeView(), isActive: $isNavigating) {
+                        EmptyView()}
+
+                    VStack (spacing: 6){
+//                        TextField("", text: $searchText, onCommit: { isNavigating = true })
+//                            .foregroundColor(.black) // Text Color
+//                            .padding(.leading, 40) // Padding to prevent icon from overlapping text
+//                            .padding() // General Padding for the TextField
+//                            .background(Color.white) // Background Color
+//                            .cornerRadius(10) // Corner Radius
+//                            .shadow(radius: 4) // Shadow
+//                            .overlay(
+//                                HStack {
+//                                    Image(systemName: "magnifyingglass")
+//                                        .foregroundColor(.gray)
+//                                        .padding(.leading)
+//                                    
+//                                    // Placeholder Text
+//                                    if searchText.isEmpty {
+//                                        Text("Enter Location")
+//                                            .foregroundColor(.gray)
+//                                            .padding(.leading, 5)
+//                                    }
+//                                    
+//                                    Spacer()
+//                                }
+//                            )
                         
-                        Spacer()
-                    }//:HStack
-                    
-                    // CIRCLE (DRAGABLE)
-                    HStack {
-                        ZStack{
-                            Circle()
-                                .fill(Color("ColorRed"))
-                            Circle()
-                                .fill(Color.black.opacity(0.15))
-                                .padding(8)
+                        
+                        
+                        Button(action: {
+                            isNavigating = true
                             
-                            Image(systemName: "chevron.right.2")
-                                .font(.system(size: 24, weight: .bold))
+                        }) {
+                            Text("Check Nearby Stores")
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(LinearGradient(gradient: Gradient(colors: [Color.red, Color.red.opacity(0.8)]), startPoint: .top, endPoint: .bottom))
+                                .cornerRadius(10)
+                                .shadow(color: .red.opacity(0.5), radius: 10, x: 0, y: 10)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(Color.red, lineWidth: 2)
+                                        .shadow(color: .white, radius: 10, x: -5, y: -5)
+                                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                                        .shadow(color: .black, radius: 5, x: 5, y: 5)
+                                )
                         }
-                        .foregroundColor(.white)
-                        .frame(width: 80, height: 80, alignment: .center)
-                        .offset(x: buttonOffset)
-                        .gesture(
-                            DragGesture()
-                                .onChanged{gesture in
-                                    if gesture.translation.width > 0 && buttonOffset <= buttonWidth - 80 {
-                                        buttonOffset = gesture.translation.width
-                                    }
-                                }
-                                .onEnded{_ in
-                                    withAnimation(Animation.easeOut(duration: 0.4)) {
-                                        if buttonOffset > buttonWidth / 2 {
-                                            buttonOffset = buttonWidth - 80
-                                            isOnboardingViewActive = false
-                                            //playSound(sound: "chimeup", type: "mp3")
-                                        }else{
-                                            buttonOffset = 0
-                                        }
-                                        
-                                    }
-                                }
-                        )
-//                        .onTapGesture {
-//                            isOnboardingViewActive = false
-//                        }
-                        
                         Spacer()
                     }
-                }//:ZStack
+                   
+                    
+
+                }
+                //:ZStack
                 .frame(width: buttonWidth, height: 80, alignment: .center)
-                .padding()
-                .opacity(isAnimating ? 1 : 0)
-                .offset(y: isAnimating ? 0 : 40)
-                .animation(.easeOut(duration: 1), value: isAnimating)
                 
+                
+                Spacer()
                 
                 
             } //:VStack

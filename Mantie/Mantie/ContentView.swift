@@ -30,9 +30,10 @@ struct ContentView: View {
         VStack {
             
             TabView {
+                       
                         HomeView()
                             .tabItem {
-                                Label("Home", systemImage: "house")
+                                Label("Book Now", systemImage: "magnifyingglass")
                             }
 
                         ReservationView()
@@ -45,11 +46,12 @@ struct ContentView: View {
                                 Label("Menu", systemImage: "list.dash")
                             }
                     }
-                    .accentColor(.pink) 
+                    .accentColor(.orangeM) 
                 }
                 .background(Color.white.opacity(0)) // Set the background color for the TabView
                 
             
+
     }
 }
 
